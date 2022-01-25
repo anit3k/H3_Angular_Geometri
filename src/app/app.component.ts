@@ -14,6 +14,9 @@ import { TrapezeCal } from './domain/trapezeCal';
 })
 export class AppComponent {
 
+  arealResult: string = "";
+  perimeterResult: string = "";
+
   // ngModel
   userInput: IUSerInput = {
     squareType: "",
@@ -33,36 +36,40 @@ export class AppComponent {
   squareTypes: ISquareType[] = [{ id: 1, type: "Rectangle" }, { id: 2, type: "Square" }, { id: 3, type: "Parallelogram" }, { id: 4, type: "Trapeze" }]
 
   onClickCalculate(form: NgForm) {
+    this.clearResult();
     switch (this.userInput.squareType) {
       case "":
         console.log("no square type selected!");
         break;
       case "1":
         let arealResultRect = this.rectCal.CalculateArea(this.userInput.sideA, this.userInput.sideB)
-        console.log("Area is: " + arealResultRect);
+        this.arealResult += ("Area is: " + arealResultRect);
         let perimeterResultRect = this.rectCal.CalculatePerimeter(this.userInput.sideA, this.userInput.sideB);
-        console.log("Perimeter is: " + perimeterResultRect);
+        this.perimeterResult += ("Perimeter is: " + perimeterResultRect);
         break;
       case "2":
         let arealResultSqu = this.squaCal.CalculateArea(this.userInput.sideA, this.userInput.sideB);
-        console.log("Areal is: " + arealResultSqu);
+        this.arealResult += ("Area is: " + arealResultSqu);
         let perimeterResultSqu = this.squaCal.CalculatePerimeter(this.userInput.sideA, this.userInput.sideB);
-        console.log("Perimeter is: " + perimeterResultSqu)
+        this.perimeterResult += ("Perimeter is: " + perimeterResultSqu)
         break;
       case "3":
         let arealResultParra = this.parraCal.CalculateArea(this.userInput.height, this.userInput.baseline);
-        console.log("Area is: " + arealResultParra);
+        this.arealResult += ("Area is: " + arealResultParra);
         let perimeterResultParra = this.parraCal.CalculatePerimeter(this.userInput.sideA, this.userInput.sideB);
-        console.log("Perimeter is: " + perimeterResultParra);
+        this.perimeterResult += ("Perimeter is: " + perimeterResultParra);
         break;
       case "4":
         let arealResultTrap = this.trapCal.CalculateArea(this.userInput.height, this.userInput.sideA + this.userInput.sideB);
-        console.log("Area is: " + arealResultTrap);
+        this.arealResult += ("Area is: " + arealResultTrap);
         // implement calculation of perimeter of trapez
-        console.log("Perimeter is: Not Implementet!")
+        this.perimeterResult += ("Perimeter is: Not Implementet!")
         break;
-    }
+    }    
+  }
 
-
+  clearResult(): void {
+    this.arealResult = "";
+    this.perimeterResult = "";
   }
 }

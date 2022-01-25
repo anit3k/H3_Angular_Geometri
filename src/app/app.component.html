@@ -8,37 +8,51 @@
           <br>
           <div class="form-group">
             <label>Select figure to calculate</label>
-            <select class="form-select" [(ngModel)]="userInput.squareType" name="userInputType">
-              <option *ngFor="let option of squareTypes" [value]="option.id" >
+            <select class="form-select" [(ngModel)]="userInput.squareType" name="userInputType" (click)="clearResult()">
+              <option *ngFor="let option of squareTypes" [value]="option.id">
                 {{option.type}}
               </option>
             </select>
           </div>
           <div class="form-group" *ngIf="userInput.squareType != ''">
-            <label for="a" *ngIf="userInput.squareType == '1' || userInput.squareType == '2' || userInput.squareType == '4'" >Side A</label>
-            <label for="a" *ngIf="userInput.squareType == '3'" >Heigh</label>
-            <input type="number" class="form-control" id="a" placeholder="Enter length of side a" [(ngModel)]="userInput.sideA" name="userInputA">
+            <label for="a"
+              *ngIf="userInput.squareType == '1' || userInput.squareType == '2' || userInput.squareType == '4'">Side
+              A</label>
+            <label for="a" *ngIf="userInput.squareType == '3'">Heigh</label>
+            <input type="number" class="form-control" id="a" placeholder="Enter length of side a"
+              [(ngModel)]="userInput.sideA" name="userInputA">
           </div>
           <div class="form-group" *ngIf="userInput.squareType != '' && userInput.squareType != '2'">
             <label for="b" *ngIf="userInput.squareType != '2'">Side B</label>
-            <input type="number" class="form-control" id="b" placeholder="Enter length of side b" [(ngModel)]="userInput.sideB" name="userInputB">
+            <input type="number" class="form-control" id="b" placeholder="Enter length of side b"
+              [(ngModel)]="userInput.sideB" name="userInputB">
           </div>
           <div class="form-group" *ngIf="userInput.squareType == '3' || userInput.squareType == '4'">
             <label for="b" *ngIf="userInput.squareType == '3'  || userInput.squareType == '4'">Height</label>
-            <input type="number" class="form-control" id="b" placeholder="Enter length of side b" [(ngModel)]="userInput.height" name="userInputHeight">
+            <input type="number" class="form-control" id="b" placeholder="Enter length of side b"
+              [(ngModel)]="userInput.height" name="userInputHeight">
           </div>
           <div class="form-group" *ngIf="userInput.squareType == '3' ">
             <label for="b" *ngIf="userInput.squareType == '3'">Baseline</label>
-            <input type="number" class="form-control" id="b" placeholder="Enter length of side b" [(ngModel)]="userInput.baseline" name="userInputBaseLine">
+            <input type="number" class="form-control" id="b" placeholder="Enter length of side b"
+              [(ngModel)]="userInput.baseline" name="userInputBaseLine">
           </div>
           <br>
           <button type="submit" class="btn btn-primary">Calculate</button>
         </form>
+        <div *ngIf="arealResult.length != 0" style="margin: 20px;">
+          <h3>
+            {{arealResult}}
+          </h3>
+        </div>
+        <div *ngIf="perimeterResult.length != 0" style="margin: 20px;">
+          <h3>
+            {{perimeterResult}}
+          </h3>
+        </div>
       </div>
       <div class="p-2"></div>
     </div>
   </div>
   <div class="p-2"></div>
 </div>
-
-{{form.value |json}}
